@@ -39,3 +39,21 @@ resource "aws_lb_target_group" "alb_target_group_no_tags" {
   protocol = "HTTP"
   vpc_id   = "vpc-0123456789abcdef0"
 }
+
+# Resource with tags corrected
+resource "aws_s3_bucket" "bucket_with_tags" {
+  bucket = "test-bucket-with-tags"
+
+  tags = {
+    applicationUid = "cloudplatform"
+    assignment_group = "Cloud Engineering"
+    environment = "dev"
+    car_id = "5678"
+  }
+}
+
+# Resource that does not support tags
+resource "aws_iam_role_policy_attachment" "iam_no_tags" {
+  role       = "test-iam-role"
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
